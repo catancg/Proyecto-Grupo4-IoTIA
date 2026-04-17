@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "author": "Martin - Posgrado IoT",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-mpu6050",
+      "id": "mpu6050",
+      "top": -274.58,
+      "left": -84.08,
+      "attrs": { "accelX": "0.2", "accelY": "0.1", "accelZ": "9.8" }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "pot1",
+      "top": -202.9,
+      "left": 86.2,
+      "attrs": { "label": "Flow Sensor", "value": "0.5" }
+    },
+    {
+      "type": "wokwi-serial-monitor",
+      "id": "$serialMonitor",
+      "top": 220,
+      "left": 120,
+      "attrs": {}
+    },
+    {
+      "type": "board-bmp180",
+      "id": "bmp1",
+      "top": -32.96,
+      "left": -345.34,
+      "attrs": { "temperature": "25.2", "pressure": "100000" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": 96.3,
+      "left": -312.6,
+      "attrs": { "temperature": "80" }
+    },
+    { "type": "wokwi-ds18b20", "id": "temp1", "top": 123.67, "left": -389.52, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "mpu6050:VCC", "esp:3V3", "red", [ "h48.08", "v134.4", "h-33.79" ] ],
+    [ "mpu6050:GND", "esp:GND.1", "black", [ "h0.08", "v422.4" ] ],
+    [ "mpu6050:SDA", "esp:21", "green", [ "v-19.2", "h268.88", "v364.8" ] ],
+    [ "mpu6050:SCL", "esp:22", "blue", [ "v-28.8", "h201.68", "v345.6" ] ],
+    [ "pot1:VCC", "esp:3V3", "red", [ "v86.4", "h-130.59" ] ],
+    [ "pot1:GND", "esp:GND.2", "black", [ "v163.2" ] ],
+    [ "bmp1:VCC", "esp:3V3", "red", [ "v-19.2", "h283.01" ] ],
+    [ "bmp1:GND", "esp:GND.1", "black", [ "h48", "v134.59", "h0", "v9.6" ] ],
+    [ "dht1:GND", "esp:GND.1", "black", [ "v0", "h115.2", "v-48", "h0", "v0", "h48" ] ],
+    [ "dht1:VCC", "esp:3V3", "red", [ "h-48", "v67.2", "h268.8", "v-230.4", "v-9.6" ] ],
+    [ "bmp1:SCL", "esp:22", "green", [ "h336", "v57.79", "h43.16" ] ],
+    [ "esp:21", "bmp1:SDA", "green", [ "h43.24", "v-76.8", "h-355.2", "v-0.19" ] ],
+    [ "mpu6050:SDA", "bmp1:SDA", "green", [ "v211.2", "h-172.72", "v57.41" ] ],
+    [ "bmp1:SCL", "mpu6050:SCL", "green", [ "h124.8", "v-211.01", "v-76.8", "h124.72" ] ],
+    [ "pot1:SIG", "esp:34", "green", [ "v96", "h-173.2", "v105.6" ] ],
+    [ "dht1:VCC", "temp1:VCC", "red", [ "v0" ] ],
+    [ "dht1:GND", "temp1:GND", "black", [ "v-9.6", "h-115.2" ] ],
+    [ "temp1:DQ", "esp:4", "green", [ "v76.8", "h470.4", "v0", "h19.2", "v-105.6", "h-9.6" ] ]
+  ],
+  "dependencies": {}
+}
